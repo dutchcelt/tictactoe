@@ -1,19 +1,19 @@
 {
-  "name": "tictactoe",
-  "version": "1.0.0",
-  "main": "src/index.html",
-  "scripts":{
-    "play": "es-dev-server"
-  },
-  "repository": "git+https://github.com/dutchcelt/tictactoe.git",
-  "author": "C. Egor Kloos",
-  "license": "MIT",
-  "dependencies": {
-    "es-module-shims": "^0.12.2"
-  },
-  "devDependencies": {
-    "@jspm/generator": "^1.0.0-beta.7",
-    "es-dev-server": "^2.1.0",
-    "rollup": "^2.53.3"
-  }
+	"name": "tictactoe",
+	"version": "1.0.0",
+	"main": "src/index.html",
+	"scripts":{
+		"play": "es-dev-server"
+	},
+	"repository": "git+https://github.com/dutchcelt/tictactoe.git",
+	"author": "C. Egor Kloos",
+	"license": "MIT",
+	"dependencies": {
+		"es-module-shims": "^0.12.2"
+	},
+	"devDependencies": {
+		"@jspm/generator": "^1.0.0-beta.7",
+		"es-dev-server": "^2.1.0",
+		"rollup": "^2.53.3"
+	}
 }
