@@ -1,3 +1,4 @@
+
 const SIDE = 3;
 const NUMBEROFSQUARES = Math.pow(SIDE, 2);
 const REFERENCE = 'tictactoe';
@@ -156,17 +157,18 @@ function findMatchingMarks(matrix, mark, c) {
 	return [flag, block];
 
 }
-function tictictoe(parent) {
-	Object.assign(init(parent), BOARD, PLAYERS, EVENTS, LOGIC)
-		.createBoard()
-		.listen();
-}
+
 
 function resetGame(elem, parent) {
 	parent.removeChild(elem);
 	tictictoe(parent);
 }
 
-tictictoe();
+function tictictoe(parent) {
+	Object.assign(init(parent), BOARD, PLAYERS, EVENTS, LOGIC)
+		.createBoard()
+		.listen();
+}
 
+tictictoe();
 
