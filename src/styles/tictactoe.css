@@ -1,12 +1,12 @@
-:root {
+:host {
 	  --darkgrey: #3f3f3f;
 	  --orange: goldenrod;
 	  --green: olivedrab;
 	  --line: 5px;
 	  --weight: 12px;
-	}
-	body {
-	  background: var(--darkgrey);
+  }
+body	  {
+	background: var(--darkgrey);
 	  display: grid;
 	  justify-content: center;
 	  align-content: center;

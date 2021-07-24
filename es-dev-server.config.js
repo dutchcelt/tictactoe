@@ -1,7 +1,7 @@
 module.exports = {
 	port: 9009,
 	watch: true,
-	open: true,
+	open: false,
 	nodeResolve: false,
 	appIndex: '/src/index.html',
 	compatibility: 'none',
