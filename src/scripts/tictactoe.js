@@ -18,6 +18,7 @@ export const init = (parent) =>
         lock: false,
         handleEvent: handleEvent,
     });
+
 export default function tictactoe(parent) {
     createBoard.call(init(parent));
 }

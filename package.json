@@ -6,12 +6,11 @@
     "scripts": {
         "start": "web-dev-server",
         "play": "es-dev-server",
-        "test": "ava"
+        "test": "ava --verbose"
     },
     "repository": "git+https://github.com/dutchcelt/tictactoe.git",
     "author": "C. Egor Kloos",
     "license": "MIT",
-    "dependencies": {},
     "devDependencies": {
         "@web/dev-server": "^0.1.20",
         "ava": "^3.15.0",
