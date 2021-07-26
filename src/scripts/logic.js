@@ -1,5 +1,7 @@
+import tictactoe from './tictactoe.js';
 import { default as findMatchingMarks, other } from './findMatchingMarks.js';
 import { gameOver } from './state.js';
+import { placeOnBoard } from './board.js';
 
 function calculateNextMove(matrix, mark, c) {
     const [flag, block] = findMatchingMarks.call(this, ...arguments, this.SIDE);
@@ -7,6 +9,17 @@ function calculateNextMove(matrix, mark, c) {
         flag === c &&
         block.reduce((w, v) => (matrix[v.x][v.y] === '' ? v : w), false)
     );
+}
+
+export function autoPlay() {
+    const index = nextMove.call(this);
+    if (index > -1 && !this.winner)
+        placeOnBoard.call(this, 'O', this.elems[index]);
+}
+
+export function resetGame(elem, parent) {
+    parent.removeChild(elem);
+    tictactoe(parent);
 }
 
 export function nextMove() {

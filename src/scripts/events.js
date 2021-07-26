@@ -1,17 +1,5 @@
-import tictactoe from './tictactoe.js';
 import { createBoard, placeOnBoard } from './board.js';
-import { nextMove } from './logic.js';
-
-function autoPlay() {
-    const index = nextMove.call(this);
-    if (index > -1 && !this.winner)
-        placeOnBoard.call(this, 'O', this.elems[index]);
-}
-
-function resetGame(elem, parent) {
-    parent.removeChild(elem);
-    tictactoe(parent);
-}
+import { autoPlay, resetGame } from './logic.js';
 
 export default function handleEvent(event) {
     if (this.lock) return;
