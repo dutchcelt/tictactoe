@@ -1,21 +1,22 @@
-export function gameOver(mark) {
-    const constructorArray = new Array(this.SIDE).fill();
+export function gameOver(mark, boardSize, boardStateArray) {
+    //	Creating an empty array so that we can create maps for each possible winning pattern.
+    const constructorArray = new Array(boardSize).fill();
     return [
-        // rows
+        //	rows
         (patternIndex) =>
             constructorArray.map(
-                (empty, rowIndex) => patternIndex * this.SIDE + rowIndex
+                (empty, rowIndex) => patternIndex * boardSize + rowIndex
             ),
-        // columns
+        //	columns
         (patternIndex) =>
             constructorArray.map(
-                (empty, columnIndex) => columnIndex * this.SIDE + patternIndex
+                (empty, columnIndex) => columnIndex * boardSize + patternIndex
             ),
-        // backward diagonal
-        (patternIndex) => patternIndex * this.SIDE + patternIndex,
+        //	backward diagonal
+        (patternIndex) => patternIndex * boardSize + patternIndex,
         // forward diagonal
         (patternIndex) =>
-            patternIndex * this.SIDE + this.SIDE - patternIndex - 1,
+            patternIndex * boardSize + boardSize - patternIndex - 1,
     ].some((patternFunction) => {
         const patternArray = constructorArray.map((empty, patternIndex) =>
             patternFunction(patternIndex)
@@ -23,13 +24,15 @@ export function gameOver(mark) {
         return [patternArray]
             .flat(+Array.isArray(patternArray[0]))
             .some((pattern) =>
-                pattern.every((x) => this.positions[x] === mark)
+                pattern.every(
+                    (positionIndex) => boardStateArray[positionIndex] === mark
+                )
             );
     });
 }
 
 export function checkForWinner(mark) {
-    if (gameOver.call(this, mark)) {
+    if (gameOver(mark, this.SIDE, this.positions)) {
         this.winner = mark;
     } else if (this.turn === this.NUMBEROFSQUARES) {
         this.winner = this.TIE;
