@@ -5,8 +5,8 @@
     "type": "module",
     "scripts": {
         "start": "web-dev-server",
-        "play": "es-dev-server",
-        "test": "ava --verbose"
+        "develop": "web-dev-server & ava --verbose --watch ",
+        "test": "ava"
     },
     "repository": "git+https://github.com/dutchcelt/tictactoe.git",
     "author": "C. Egor Kloos",
