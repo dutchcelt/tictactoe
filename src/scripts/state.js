@@ -32,7 +32,7 @@ export function gameOver(mark, boardSize, boardStateArray) {
 }
 
 export function checkForWinner(mark) {
-    if (gameOver(mark, this.SIDE, this.positions)) {
+    if (gameOver(mark, this.boardSize, this.boardStateArray)) {
         this.winner = mark;
     } else if (this.turn === this.NUMBEROFSQUARES) {
         this.winner = this.TIE;

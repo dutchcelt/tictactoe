@@ -1,10 +1,10 @@
 import { checkForWinner } from './state.js';
 
 function getRowFromIndex(index) {
-    return Math.floor(index / this.SIDE);
+    return Math.floor(index / this.boardSize);
 }
 function getColFromIndex(index) {
-    return index - this.SIDE * Math.floor(index / this.SIDE);
+    return index - this.boardSize * Math.floor(index / this.boardSize);
 }
 
 export function createBoard() {
@@ -26,7 +26,7 @@ export function placeOnBoard(mark, target) {
         x: getRowFromIndex.call(this, index),
         y: getColFromIndex.call(this, index),
     };
-    this.positions[index] = mark;
+    this.boardStateArray[index] = mark;
     target.dataset[this.REFERENCE] = mark;
     this.turn++;
     checkForWinner.call(this, mark);

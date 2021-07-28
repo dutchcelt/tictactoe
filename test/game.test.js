@@ -13,7 +13,7 @@ browserEnv(['document']);
 test('main object test', (t) => {
     const gameObj = init(document.body, 3);
     t.assert(gameObj.turn === 0);
-    t.assert(gameObj.SIDE === 3);
+    t.assert(gameObj.boardSize === 3);
     t.assert(gameObj.NUMBEROFSQUARES === 9);
     t.assert(gameObj.winner === false);
     t.assert(typeof gameObj.handleEvent === 'function');
