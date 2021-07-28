@@ -1,6 +1,7 @@
 import test from 'ava';
 import { init } from '../src/scripts/tictactoe.js';
 import { createBoard, placeOnBoard } from '../src/scripts/board.js';
+import { gameOver } from '../src/scripts/state.js';
 import browserEnv from 'browser-env';
 
 browserEnv(['document']);
@@ -35,4 +36,42 @@ test('placeOnBoard', (t) => {
         gameObj.elem.children[1].getAttribute(`data-${gameObj.REFERENCE}`) ===
             mark
     );
+});
+
+test('game over', (t) => {
+    // small board
+    t.true(gameOver('X', 2, ['X', '', 'O', 'X']));
+    // large board - Column win
+    t.true(
+        gameOver('X', 4, [
+            'X',
+            '',
+            '',
+            'O',
+            'X',
+            '',
+            'O',
+            '',
+            'X',
+            'O',
+            '',
+            '',
+            'X',
+            '',
+            '',
+            '',
+        ])
+    );
+    // empty
+    t.false(gameOver('X', 3, ['', '', '', '', '', '', '', '', '']));
+    // row
+    t.true(gameOver('O', 3, ['X', 'X', '', 'O', 'O', 'O', '', '', '']));
+    // Column
+    t.true(gameOver('X', 3, ['X', 'O', 'X', 'X', 'O', 'O', 'X', '', '']));
+    // random
+    t.false(gameOver('O', 3, ['X', 'O', 'O', 'X', 'X', 'O', 'X', 'O', '']));
+    // backward diagonal
+    t.true(gameOver('X', 3, ['X', 'O', 'O', 'X', 'X', 'O', '', 'O', 'X']));
+    // forward diagonal
+    t.true(gameOver('O', 3, ['X', 'O', 'O', 'X', 'O', 'X', 'O', 'O', '']));
 });
