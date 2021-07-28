@@ -2,13 +2,15 @@ import { createBoard, placeOnBoard } from './board.js';
 import opts from '../vars/const.js';
 import handleEvent from './events.js';
 
-export const init = (parent) =>
+export const init = (parent = document.body, size = 3) =>
     Object.create({
         ...opts,
-        parent: parent || document.body,
+        SIDE: size,
+        NUMBEROFSQUARES: Math.pow(size, 2),
+        parent: parent,
         elem: document.createElement('main'),
         turn: 0,
-        positions: new Array(opts.NUMBEROFSQUARES).fill(''),
+        positions: new Array(Math.pow(size, 2)).fill(''),
         matrix: [
             ['', '', ''],
             ['', '', ''],
@@ -20,5 +22,5 @@ export const init = (parent) =>
     });
 
 export default function tictactoe(parent) {
-    createBoard.call(init(parent));
+    createBoard.call(init(parent, 3));
 }
