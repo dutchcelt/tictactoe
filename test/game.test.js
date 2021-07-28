@@ -4,6 +4,10 @@ import { createBoard, placeOnBoard } from '../src/scripts/board.js';
 import { gameOver } from '../src/scripts/state.js';
 import browserEnv from 'browser-env';
 
+/*
+ * https://github.com/avajs/ava/tree/main/docs
+ */
+
 browserEnv(['document']);
 
 test('main object test', (t) => {
