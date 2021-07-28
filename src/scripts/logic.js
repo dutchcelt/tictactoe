@@ -1,6 +1,5 @@
 import tictactoe from './tictactoe.js';
 import { default as findMatchingMarks, other } from './findMatchingMarks.js';
-import { gameOver } from './state.js';
 import { placeOnBoard } from './board.js';
 
 function calculateNextMove(matrix, mark, c) {
