@@ -21,6 +21,10 @@ export function gameOver(mark, boardSize, boardStateArray) {
         const patternArray = constructorArray.map((empty, patternIndex) =>
             patternFunction(patternIndex)
         );
+        const checksum = patternArray.flat();
+        if (checksum.length !== new Set(checksum).size) {
+            throw 'Pattern returns duplicate positions ';
+        }
         return [patternArray]
             .flat(+Array.isArray(patternArray[0]))
             .some((pattern) =>
