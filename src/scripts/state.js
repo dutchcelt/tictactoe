@@ -36,16 +36,21 @@ export function gameOver(mark, boardSize, boardStateArray) {
 }
 
 export function checkForWinner(mark) {
-    if (gameOver(mark, this.boardSize, this.boardStateArray)) {
-        this.winner = mark;
-    } else if (this.turn === this.NUMBEROFSQUARES) {
-        this.winner = this.TIE;
-    }
-    if (this.winner) {
-        this.lock = true;
-        setTimeout(() => {
-            this.elem.dataset[this.REFERENCE] = this.winner;
-            this.lock = false;
-        }, 1000);
-    }
+    // wrapping an asynchronous (setTimeout) function with a promise
+    return new Promise((resolve) => {
+        if (gameOver(mark, this.boardSize, this.boardStateArray)) {
+            this.winner = mark;
+        } else if (this.turn === this.NUMBEROFSQUARES) {
+            this.winner = this.TIE;
+        }
+        if (this.winner) {
+            this.lock = true;
+            setTimeout(() => {
+                this.elem.dataset[this.REFERENCE] = this.winner;
+                this.lock = false;
+                resolve();
+            }, 1000);
+        }
+        resolve();
+    });
 }
