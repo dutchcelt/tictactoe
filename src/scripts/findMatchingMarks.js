@@ -1,6 +1,6 @@
 export function other(mark) {
     if (mark !== this.X && mark !== this.O) {
-        throw 'Invalid mark used. Should be an X or an O';
+        throw `Invalid mark used. Should be an "${this.X}" or an "${this.O}"`;
     }
     return mark === this.X ? this.O : this.X;
 }
@@ -16,7 +16,6 @@ export default function findMatchingMarks(matrix, mark, c) {
         block[count] = { x, y };
         return currentMark !== other.call(this, mark);
     };
-
     matrix.some((r, n, a) => {
         return [
             () => r.every((s, i) => evaluate(n, i, i)), // Row
@@ -28,5 +27,6 @@ export default function findMatchingMarks(matrix, mark, c) {
             return flag === c && f;
         });
     });
+
     return [flag, block];
 }
