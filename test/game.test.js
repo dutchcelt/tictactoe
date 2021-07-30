@@ -2,6 +2,7 @@ import test from 'ava';
 import { init } from '../src/scripts/tictactoe.js';
 import { createBoard, placeOnBoard } from '../src/scripts/board.js';
 import { gameOver, checkForWinner } from '../src/scripts/state.js';
+import { other } from '../src/scripts/findMatchingMarks.js';
 import browserEnv from 'browser-env';
 
 /*
@@ -84,20 +85,28 @@ test('game over', (t) => {
 
 test('Check for a winner', async (t) => {
     const gameObj = init(document.body, 3);
+    const thisWinner = checkForWinner.bind(gameObj);
     // empty board
-    await checkForWinner.call(gameObj, 'X');
+    await thisWinner('X');
     t.false(gameObj.winner === 'X');
     // X should win
     gameObj.boardStateArray = ['X', 'O', 'X', 'X', 'O', 'O', 'X', '', ''];
-    await checkForWinner.call(gameObj, 'X');
+    await thisWinner('X');
     t.true(gameObj.winner === 'X');
     // O should win
     gameObj.boardStateArray = ['X', 'X', '', 'O', 'O', 'O', '', '', ''];
-    await checkForWinner.call(gameObj, 'O');
+    await thisWinner('O');
     t.true(gameObj.winner === 'O');
     // game is a tie
     gameObj.boardStateArray = ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O'];
     gameObj.turn = gameObj.NUMBEROFSQUARES;
-    await checkForWinner.call(gameObj, 'X');
+    await thisWinner(); // Nobody
     t.true(gameObj.winner === gameObj.TIE);
+});
+
+test('return the other mark', (t) => {
+    const gameObj = init(document.body, 3);
+    const otherPlayer = other.bind(gameObj);
+    t.true(otherPlayer(gameObj.X) === gameObj.O);
+    t.true(otherPlayer(gameObj.O) === gameObj.X);
 });

@@ -1,4 +1,7 @@
 export function other(mark) {
+    if (mark !== this.X && mark !== this.O) {
+        throw 'Invalid mark used. Should be an X or an O';
+    }
     return mark === this.X ? this.O : this.X;
 }
 
