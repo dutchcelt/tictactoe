@@ -1,8 +1,12 @@
 import test from 'ava';
 import { init } from '../src/scripts/tictactoe.js';
 import { createBoard, placeOnBoard } from '../src/scripts/board.js';
-import { gameOver, checkForWinner } from '../src/scripts/state.js';
-import { default as matches, other } from '../src/scripts/findMatchingMarks.js';
+import {
+    gameOver,
+    checkForWinner,
+    getGameChecks,
+} from '../src/scripts/state.js';
+import { other, nextMove } from '../src/scripts/logic.js';
 import browserEnv from 'browser-env';
 
 /*
@@ -113,7 +117,5 @@ test('return the other mark', (t) => {
 
 test('Find matching marks', (t) => {
     const gameObj = init(document.body, 3);
-    const thisMatches = matches.bind(gameObj);
-    gameObj.matrix[0][0] === 'X';
-    gameObj.matrix[0][1] === 'X';
+    t.true(nextMove.call(gameObj) === 4);
 });

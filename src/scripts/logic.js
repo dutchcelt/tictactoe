@@ -1,18 +1,28 @@
 import tictactoe from './tictactoe.js';
-import { default as findMatchingMarks, other } from './findMatchingMarks.js';
 import { placeOnBoard } from './board.js';
+import { getGameChecks, gameOver, constructorArray } from './state.js';
 
-function calculateNextMove(matrix, mark, c) {
-    const [flag, block] = findMatchingMarks.call(
-        this,
-        ...arguments,
-        this.boardSize
-    );
-    return (
-        flag === c &&
-        block.reduce((w, v) => (matrix[v.x][v.y] === '' ? v : w), false)
-    );
+export function other(mark) {
+    if (mark !== this.X && mark !== this.O) {
+        throw `Invalid mark used. Should be an "${this.X}" or an "${this.O}"`;
+    }
+    return mark === this.X ? this.O : this.X;
 }
+
+const getWinningMove = (mark, boardSize, boardStateArray) => {
+    let pos;
+    getGameChecks(boardSize, boardStateArray).some((pattern) => {
+        const line = pattern.map((i) => boardStateArray[i]);
+        if (
+            line.filter((m) => m === mark).length === 2 &&
+            line.indexOf('') >= 0
+        ) {
+            pos = pattern[line.indexOf('')];
+            return true;
+        }
+    });
+    return pos;
+};
 
 export function autoPlay() {
     const index = nextMove.call(this);
@@ -27,27 +37,30 @@ export function resetGame(elem, parent) {
 
 export function nextMove() {
     let center = this.boardStateArray[4];
-    let even = [0, 2, 6, 8];
-    let odd = [1, 3, 5, 7];
+    const boardIndex = this.boardStateArray.map((m, i) => i);
+    let even = boardIndex.filter(
+        (i) => !!(i % 2 == 0) && i !== Math.floor(boardIndex.length / 2)
+    );
+    let odd = boardIndex.filter((i) => !(i % 2 == 0));
 
-    const thisNextMove = calculateNextMove.bind(this);
     const thisOther = other.bind(this);
 
     let newPos = -1;
-    const mark = this.matrix[this.currentAxes.x][this.currentAxes.y];
-    const winningMove = thisNextMove(this.matrix, thisOther(mark), 2);
-    const nextCoord = winningMove || thisNextMove(this.matrix, mark, 2); // Blocking move;
+    const mark = this.turn % 2 == 0 ? this.O : this.X;
+    const winningMove = getWinningMove(
+        thisOther(mark),
+        this.boardSize,
+        this.boardStateArray
+    );
+    const nextCoord =
+        winningMove !== undefined
+            ? winningMove
+            : getWinningMove(mark, this.boardSize, this.boardStateArray); // Blocking move;
 
-    if (
-        this.boardStateArray.reduce((c, v, i) => (v === mark ? c + i : c)) > 10
-    ) {
-        even.reverse();
-        odd.reverse();
-    }
-    if (nextCoord) {
-        newPos = this.boardSize * nextCoord.x + nextCoord.y;
+    if (nextCoord !== undefined) {
+        newPos = nextCoord;
     } else if (!center) {
-        newPos = 4;
+        newPos = Math.floor(boardIndex.length / 2);
     } else {
         [...even, ...odd].some((i) => {
             if (!this.boardStateArray[i]) {
@@ -55,6 +68,7 @@ export function nextMove() {
                 return true;
             }
         });
+        newPos = nextCoord || newPos;
     }
     return newPos;
 }
