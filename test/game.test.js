@@ -79,7 +79,7 @@ test('game over', (t) => {
     // forward diagonal
     t.true(gameOver('O', 3, ['X', 'O', 'O', 'X', 'O', 'X', 'O', 'O', '']));
     // game is a tie
-    t.false(gameOver('O', 3, ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']));
+    t.true(gameOver('O', 3, ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O']));
 });
 
 test('Check for a winner', async (t) => {

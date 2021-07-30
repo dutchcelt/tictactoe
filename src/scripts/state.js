@@ -25,13 +25,19 @@ export function gameOver(mark, boardSize, boardStateArray) {
         if (checksum.length !== new Set(checksum).size) {
             throw 'Pattern returns duplicate positions ';
         }
-        return [patternArray]
-            .flat(+Array.isArray(patternArray[0]))
-            .some((pattern) =>
-                pattern.every(
-                    (positionIndex) => boardStateArray[positionIndex] === mark
+        return (
+            [patternArray]
+                // Normalise the patternArray
+                .flat(+Array.isArray(patternArray[0]))
+                .some(
+                    (pattern) =>
+                        boardStateArray.every((mark) => mark) ||
+                        pattern.every(
+                            (positionIndex) =>
+                                boardStateArray[positionIndex] === mark
+                        )
                 )
-            );
+        );
     });
 }
 
@@ -39,9 +45,7 @@ export function checkForWinner(mark) {
     // wrapping an asynchronous (setTimeout) function with a promise
     return new Promise((resolve) => {
         if (gameOver(mark, this.boardSize, this.boardStateArray)) {
-            this.winner = mark;
-        } else if (this.turn === this.NUMBEROFSQUARES) {
-            this.winner = this.TIE;
+            this.winner = this.turn === this.NUMBEROFSQUARES ? this.TIE : mark;
         }
         if (this.winner) {
             this.lock = true;
@@ -50,7 +54,8 @@ export function checkForWinner(mark) {
                 this.lock = false;
                 resolve();
             }, 1000);
+        } else {
+            resolve();
         }
-        resolve();
     });
 }
