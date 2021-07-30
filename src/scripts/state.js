@@ -2,24 +2,25 @@ export function gameOver(mark, boardSize, boardStateArray) {
     //	Creating an empty array so that we can create maps for each possible winning pattern.
     const constructorArray = new Array(boardSize).fill();
     return [
-        //	rows
+        //	row formula
         (patternIndex) =>
             constructorArray.map(
                 (empty, rowIndex) => patternIndex * boardSize + rowIndex
             ),
-        //	columns
+        //	column formula
         (patternIndex) =>
             constructorArray.map(
                 (empty, columnIndex) => columnIndex * boardSize + patternIndex
             ),
-        //	backward diagonal
+        //	backward diagonal formula
         (patternIndex) => patternIndex * boardSize + patternIndex,
-        // forward diagonal
+        // forward diagonal formula
         (patternIndex) =>
             patternIndex * boardSize + boardSize - patternIndex - 1,
-    ].some((patternFunction) => {
+    ].some((formulaFunction) => {
+        // create an array of patterns based on the formulas above
         const patternArray = constructorArray.map((empty, patternIndex) =>
-            patternFunction(patternIndex)
+            formulaFunction(patternIndex)
         );
         const checksum = patternArray.flat();
         if (checksum.length !== new Set(checksum).size) {
@@ -31,7 +32,9 @@ export function gameOver(mark, boardSize, boardStateArray) {
                 .flat(+Array.isArray(patternArray[0]))
                 .some(
                     (pattern) =>
+                        // check if we have any moves left
                         boardStateArray.every((mark) => mark) ||
+                        // compare every pattern on the current board
                         pattern.every(
                             (positionIndex) =>
                                 boardStateArray[positionIndex] === mark
