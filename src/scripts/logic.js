@@ -1,6 +1,6 @@
 import tictactoe from './tictactoe.js';
 import { placeOnBoard } from './board.js';
-import { getGameChecks, gameOver, constructorArray } from './state.js';
+import { getEveryWinningMove, gameOver, constructorArray } from './state.js';
 
 export function other(mark) {
     if (mark !== this.X && mark !== this.O) {
@@ -11,7 +11,7 @@ export function other(mark) {
 
 const getWinningMove = (mark, boardSize, boardStateArray) => {
     let pos;
-    getGameChecks(boardSize, boardStateArray).some((pattern) => {
+    getEveryWinningMove(boardSize, boardStateArray).some((pattern) => {
         const line = pattern.map((i) => boardStateArray[i]);
         if (
             line.filter((m) => m === mark).length === 2 &&

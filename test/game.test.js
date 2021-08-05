@@ -1,11 +1,7 @@
 import test from 'ava';
 import { init } from '../src/scripts/tictactoe.js';
 import { createBoard, placeOnBoard } from '../src/scripts/board.js';
-import {
-    gameOver,
-    checkForWinner,
-    getGameChecks,
-} from '../src/scripts/state.js';
+import { gameOver, checkForWinner } from '../src/scripts/state.js';
 import { other, nextMove } from '../src/scripts/logic.js';
 import browserEnv from 'browser-env';
 

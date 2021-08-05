@@ -1,7 +1,7 @@
-//	Creating an empty array so that we can create maps corresponding with the size of the board.
+//	A function that creates an empty array so that we can create maps corresponding with the size of the board.
 export const constructorArray = (boardSize) => new Array(boardSize).fill();
 
-const getFormulas = (boardSize, boardStateArray) => [
+const getFormulas = (boardSize) => [
     //	row formula
     (patternIndex) =>
         constructorArray(boardSize).map(
@@ -33,21 +33,20 @@ const getPatternArray = (boardSize, formulaFunction) => {
     );
 };
 
-export const getGameChecks = (boardSize, boardStateArray) => {
-    const formulaArray = getFormulas(boardSize, boardStateArray);
-    const gameArray = [];
-    formulaArray.forEach((formulaFunction) => {
+export const getEveryWinningMove = (boardSize) => {
+    const formulaArray = getFormulas(boardSize);
+    const winningOptionsArray = formulaArray.map((formulaFunction) =>
         // create an array of patterns based on the formula array above
-        gameArray.push(getPatternArray(boardSize, formulaFunction));
-    });
-    return gameArray.flat(1);
+        getPatternArray(boardSize, formulaFunction)
+    );
+    return winningOptionsArray.flat(1);
 };
 
 export function gameOver(mark, boardSize, boardStateArray) {
-    return getGameChecks(boardSize, boardStateArray).some(
+    return getEveryWinningMove(boardSize).some(
         (pattern) =>
             // check if we have any moves left
-            boardStateArray.every((mark) => mark) ||
+            boardStateArray.every((markOnBoard) => !!markOnBoard) ||
             // compare every pattern on the current board
             pattern.every(
                 (positionIndex) => boardStateArray[positionIndex] === mark
