@@ -36,12 +36,13 @@ export function resetGame(elem, parent) {
 }
 
 export function nextMove() {
-    let center = this.boardStateArray[4];
     const boardIndex = this.boardStateArray.map((m, i) => i);
-    let even = boardIndex.filter(
-        (i) => !!(i % 2 == 0) && i !== Math.floor(boardIndex.length / 2)
+    const centerPosition = Math.floor(boardIndex.length / 2);
+    const centerMark = this.boardStateArray[centerPosition];
+    const evenArray = boardIndex.filter(
+        (i) => !!(i % 2 == 0) && i !== centerPosition
     );
-    let odd = boardIndex.filter((i) => !(i % 2 == 0));
+    const oddArray = boardIndex.filter((i) => !(i % 2 == 0));
 
     const thisOther = other.bind(this);
 
@@ -53,16 +54,15 @@ export function nextMove() {
         this.boardStateArray
     );
     const nextCoord =
-        winningMove !== undefined
-            ? winningMove
-            : getWinningMove(mark, this.boardSize, this.boardStateArray); // Blocking move;
+        winningMove ||
+        getWinningMove(mark, this.boardSize, this.boardStateArray); // Blocking move;
 
     if (nextCoord !== undefined) {
         newPos = nextCoord;
-    } else if (!center) {
-        newPos = Math.floor(boardIndex.length / 2);
+    } else if (!centerMark) {
+        newPos = centerPosition;
     } else {
-        [...even, ...odd].some((i) => {
+        [...evenArray, ...oddArray].some((i) => {
             if (!this.boardStateArray[i]) {
                 newPos = i;
                 return true;
