@@ -1,4 +1,4 @@
-import tictactoe from './tictactoe.js';
+import { default as tictactoe } from './tictactoe.js';
 import { placeOnBoard } from './board.js';
 import { getEveryWinningMove, gameOver, constructorArray } from './state.js';
 

@@ -1,3 +1,5 @@
+import { gameObject } from './tictactoe.js';
+
 //	A function that creates an empty array so that we can create maps corresponding with the size of the board.
 export const constructorArray = (boardSize) => new Array(boardSize).fill();
 
@@ -42,7 +44,11 @@ export const getEveryWinningMove = (boardSize) => {
     return winningOptionsArray.flat(1);
 };
 
-export function gameOver(mark, boardSize, boardStateArray) {
+export function gameOver(
+    mark,
+    boardSize = gameObject.boardSize,
+    boardStateArray = gameObject.boardStateArray
+) {
     return getEveryWinningMove(boardSize).some(
         (pattern) =>
             // check if we have any moves left
@@ -56,14 +62,18 @@ export function gameOver(mark, boardSize, boardStateArray) {
 export function checkForWinner(mark) {
     // wrapping an asynchronous (setTimeout) function with a promise
     return new Promise((resolve) => {
-        if (gameOver(mark, this.boardSize, this.boardStateArray)) {
-            this.winner = this.turn === this.NUMBEROFSQUARES ? this.TIE : mark;
+        if (gameOver(mark)) {
+            gameObject.winner =
+                gameObject.turn === gameObject.NUMBEROFSQUARES
+                    ? gameObject.TIE
+                    : mark;
         }
-        if (this.winner) {
-            this.lock = true;
+        if (gameObject.winner) {
+            gameObject.lock = true;
             setTimeout(() => {
-                this.elem.dataset[this.REFERENCE] = this.winner;
-                this.lock = false;
+                gameObject.elem.dataset[gameObject.REFERENCE] =
+                    gameObject.winner;
+                gameObject.lock = false;
                 resolve();
             }, 1000);
         } else {

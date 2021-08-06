@@ -1,33 +1,25 @@
 import { checkForWinner } from './state.js';
+import { gameObject } from './tictactoe.js';
 
-function getRowFromIndex(index) {
-    return Math.floor(index / this.boardSize);
-}
-function getColFromIndex(index) {
-    return index - this.boardSize * Math.floor(index / this.boardSize);
-}
+const getRowFromIndex = (index) => Math.floor(index / gameObject.boardSize);
+
+const getColFromIndex = (index) =>
+    index - gameObject.boardSize * Math.floor(index / gameObject.boardSize);
 
 export function createBoard() {
-    this.elem.classList.add(this.REFERENCE);
-    for (let i = 0; i < this.NUMBEROFSQUARES; i++) {
-        this.elem.appendChild(document.createElement('span'));
+    gameObject.elem.classList.add(gameObject.REFERENCE);
+    for (let i = 0; i < gameObject.NUMBEROFSQUARES; i++) {
+        gameObject.elem.appendChild(document.createElement('span'));
     }
-    this.parent.appendChild(this.elem);
-    this.elems = [...this.elem.childNodes];
-    this.elem.addEventListener('click', this, false);
+    gameObject.elems = [...gameObject.elem.childNodes];
+    gameObject.elem.addEventListener('click', gameObject, false);
+    gameObject.parent.appendChild(gameObject.elem);
 }
 
 export function placeOnBoard(mark, target) {
-    const index = this.elems.indexOf(target);
-    this.matrix[getRowFromIndex.call(this, index)][
-        getColFromIndex.call(this, index)
-    ] = mark;
-    this.currentAxes = {
-        x: getRowFromIndex.call(this, index),
-        y: getColFromIndex.call(this, index),
-    };
-    this.boardStateArray[index] = mark;
-    target.dataset[this.REFERENCE] = mark;
-    this.turn++;
-    checkForWinner.call(this, mark);
+    const index = gameObject.elems.indexOf(target);
+    gameObject.boardStateArray[index] = mark;
+    target.dataset[gameObject.REFERENCE] = mark;
+    gameObject.turn++;
+    checkForWinner(mark);
 }
