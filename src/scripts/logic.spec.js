@@ -22,18 +22,21 @@ test('Find matching marks', (t) => {
 });
 
 test('Reset game', (t) => {
+    const elemHasMark = (pos, mark) =>
+        gameObject.elems[pos].dataset[gameObject.REFERENCE] === mark;
+
     newGame(3);
     placeOnBoard(gameObject.X, gameObject.elems[0]);
     t.true(gameObject.boardSize === 3);
-    t.true(gameObject.elems[0].dataset[gameObject.REFERENCE] === gameObject.X);
+    t.true(elemHasMark(0, gameObject.X));
     resetGame();
     t.true(gameObject.boardSize === 3);
-    t.true(gameObject.elems[0].dataset[gameObject.REFERENCE] !== gameObject.X);
+    t.false(elemHasMark(0, gameObject.X));
 
     newGame(7);
     placeOnBoard(gameObject.X, gameObject.elems[21]);
-    t.true(gameObject.elems[21].dataset[gameObject.REFERENCE] === gameObject.X);
+    t.true(elemHasMark(21, gameObject.X));
     resetGame();
     t.true(gameObject.boardSize === 7);
-    t.true(gameObject.elems[21].dataset[gameObject.REFERENCE] !== gameObject.X);
+    t.false(elemHasMark(21, gameObject.X));
 });
