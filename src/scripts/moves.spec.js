@@ -7,4 +7,6 @@ test('check the move patterns', (t) => {
     t.true(getEveryWinningMove(3).length === 8);
     // A board of 5 by 5 would have 12 patterns
     t.true(getEveryWinningMove(5).length === 12);
+
+    t.true(getEveryWinningMove(3).every((pattern) => pattern.length === 3));
 });
