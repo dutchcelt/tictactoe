@@ -4,7 +4,7 @@ import { autoPlay, resetGame } from './logic.js';
 export default function handleEvent(event) {
     if (this.lock) return;
     this.lock = true;
-    if (this.elem.dataset[this.REFERENCE]) resetGame(this.elem, this.parent);
+    if (this.elem.dataset[this.REFERENCE]) resetGame();
     const isSquare = /span/i.test(event.target.tagName);
 
     if (isSquare && !event.target.dataset[this.REFERENCE]) {

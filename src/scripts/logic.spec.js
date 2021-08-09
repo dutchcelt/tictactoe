@@ -1,7 +1,8 @@
 import test from 'ava';
 import browserEnv from 'browser-env';
 import { gameObject, default as tictactoe } from './tictactoe.js';
-import { other, nextMove } from './logic.js';
+import { other, nextMove, resetGame } from './logic.js';
+import { placeOnBoard } from './board.js';
 
 browserEnv(['document']);
 
@@ -16,5 +17,23 @@ test('return the other mark', (t) => {
 
 test('Find matching marks', (t) => {
     newGame(3);
-    t.true(nextMove.call(gameObject) === 4);
+    // First counter move is always the center!
+    t.true(nextMove() === 4);
+});
+
+test('Reset game', (t) => {
+    newGame(3);
+    placeOnBoard(gameObject.X, gameObject.elems[0]);
+    t.true(gameObject.boardSize === 3);
+    t.true(gameObject.elems[0].dataset[gameObject.REFERENCE] === gameObject.X);
+    resetGame();
+    t.true(gameObject.boardSize === 3);
+    t.true(gameObject.elems[0].dataset[gameObject.REFERENCE] !== gameObject.X);
+
+    newGame(7);
+    placeOnBoard(gameObject.X, gameObject.elems[21]);
+    t.true(gameObject.elems[21].dataset[gameObject.REFERENCE] === gameObject.X);
+    resetGame();
+    t.true(gameObject.boardSize === 7);
+    t.true(gameObject.elems[21].dataset[gameObject.REFERENCE] !== gameObject.X);
 });

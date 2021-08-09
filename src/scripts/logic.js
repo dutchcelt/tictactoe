@@ -31,9 +31,9 @@ export function autoPlay() {
         placeOnBoard.call(gameObject, 'O', gameObject.elems[index]);
 }
 
-export function resetGame(elem, parent) {
-    parent.removeChild(elem);
-    tictactoe(parent);
+export function resetGame() {
+    gameObject.parent.removeChild(gameObject.elem);
+    tictactoe(gameObject.parent, gameObject.boardSize);
 }
 
 export function nextMove() {

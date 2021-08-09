@@ -17,13 +17,9 @@ test('create board', (t) => {
 
 test('placeOnBoard', (t) => {
     newGame(3);
-    const mark = 'X';
-
-    placeOnBoard(mark, gameObject.elem.children[1]);
+    placeOnBoard(gameObject.X, gameObject.elems[1]);
     t.assert(gameObject.turn === 1);
     t.assert(
-        gameObject.elem.children[1].getAttribute(
-            `data-${gameObject.REFERENCE}`
-        ) === mark
+        gameObject.elems[1].dataset[gameObject.REFERENCE] === gameObject.X
     );
 });
