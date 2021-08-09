@@ -51,13 +51,12 @@ const states = {
 };
 test('main object test', (t) => {
     tictactoe(document.body, 3);
-    const gameObj = gameObject;
-    t.assert(gameObj.turn === 0);
-    t.assert(gameObj.boardSize === 3);
-    t.assert(gameObj.NUMBEROFSQUARES === 9);
-    t.assert(gameObj.winner === false);
-    t.assert(typeof gameObj.handleEvent === 'function');
-    t.assert(gameObj.elem.tagName === 'MAIN');
+    t.assert(gameObject.turn === 0);
+    t.assert(gameObject.boardSize === 3);
+    t.assert(gameObject.NUMBEROFSQUARES === 9); // 3 x 3
+    t.assert(gameObject.winner === false);
+    t.assert(typeof gameObject.handleEvent === 'function');
+    t.assert(gameObject.elem.tagName === 'MAIN');
 });
 
 test('create board', (t) => {
@@ -102,36 +101,33 @@ test('game over', (t) => {
 
 test('Check for a winner', async (t) => {
     tictactoe(document.body, 3);
-    const gameObj = gameObject;
-    const thisWinner = checkForWinner.bind(gameObj);
+    const thisWinner = checkForWinner.bind(gameObject);
     // empty board
     await thisWinner('X');
-    t.false(gameObj.winner === 'X');
+    t.false(gameObject.winner === 'X');
     // X should win
-    gameObj.boardStateArray = states.column;
+    gameObject.boardStateArray = states.column;
     await thisWinner('X');
-    t.true(gameObj.winner === 'X');
+    t.true(gameObject.winner === 'X');
     // O should win
-    gameObj.boardStateArray = states.row;
+    gameObject.boardStateArray = states.row;
     await thisWinner('O');
-    t.true(gameObj.winner === 'O');
+    t.true(gameObject.winner === 'O');
     // game is a tie
-    gameObj.boardStateArray = states.tie;
-    gameObj.turn = gameObj.NUMBEROFSQUARES;
+    gameObject.boardStateArray = states.tie;
+    gameObject.turn = gameObject.NUMBEROFSQUARES;
     await thisWinner(); // Nobody
-    t.true(gameObj.winner === gameObj.TIE);
+    t.true(gameObject.winner === gameObject.TIE);
 });
 
 test('return the other mark', (t) => {
     tictactoe(document.body, 3);
-    const gameObj = gameObject;
-    const otherPlayer = other.bind(gameObj);
-    t.true(otherPlayer(gameObj.X) === gameObj.O);
-    t.true(otherPlayer(gameObj.O) === gameObj.X);
+    const otherPlayer = other.bind(gameObject);
+    t.true(otherPlayer(gameObject.X) === gameObject.O);
+    t.true(otherPlayer(gameObject.O) === gameObject.X);
 });
 
 test('Find matching marks', (t) => {
     tictactoe(document.body, 3);
-    const gameObj = gameObject;
-    t.true(nextMove.call(gameObj) === 4);
+    t.true(nextMove.call(gameObject) === 4);
 });
