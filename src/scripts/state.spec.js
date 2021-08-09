@@ -1,17 +1,9 @@
 import test from 'ava';
 import browserEnv from 'browser-env';
-import { gameObject, default as tictactoe } from '../src/scripts/tictactoe.js';
-import { createBoard, placeOnBoard } from '../src/scripts/board.js';
-import { gameOver, checkForWinner } from '../src/scripts/state.js';
-import { other, nextMove } from '../src/scripts/logic.js';
-
-/*
- * https://github.com/avajs/ava/tree/main/docs
- */
+import { gameObject, default as tictactoe } from './tictactoe.js';
+import { gameOver, checkForWinner } from './state.js';
 
 browserEnv(['document']);
-
-// game states
 
 const newGame = (size) => tictactoe(document.body, size);
 
@@ -51,36 +43,6 @@ const states = {
     // Full board, nobody wins
     tie: ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O'],
 };
-test('main object test', (t) => {
-    newGame(3);
-    t.assert(gameObject.turn === 0);
-    t.assert(gameObject.boardSize === 3);
-    t.assert(gameObject.boardStateArray.length === 9); // 3 x 3
-    t.assert(gameObject.winner === false);
-    t.assert(typeof gameObject.handleEvent === 'function');
-    t.assert(gameObject.elem.tagName === 'MAIN');
-});
-
-test('create board', (t) => {
-    newGame(7);
-    t.assert(gameObject.elem.className === gameObject.REFERENCE);
-    t.assert(
-        gameObject.elem.children.length === gameObject.boardStateArray.length
-    );
-});
-
-test('placeOnBoard', (t) => {
-    newGame(3);
-    const mark = 'X';
-
-    placeOnBoard(mark, gameObject.elem.children[1]);
-    t.assert(gameObject.turn === 1);
-    t.assert(
-        gameObject.elem.children[1].getAttribute(
-            `data-${gameObject.REFERENCE}`
-        ) === mark
-    );
-});
 
 test('game over', (t) => {
     newGame(2);
@@ -139,16 +101,4 @@ test('Check for a winner', async (t) => {
     gameObject.turn = gameObject.boardStateArray.length;
     await thisWinner(); // Nobody
     t.true(gameObject.winner === gameObject.TIE);
-});
-
-test('return the other mark', (t) => {
-    newGame(3);
-    const otherPlayer = other.bind(gameObject);
-    t.true(otherPlayer(gameObject.X) === gameObject.O);
-    t.true(otherPlayer(gameObject.O) === gameObject.X);
-});
-
-test('Find matching marks', (t) => {
-    newGame(3);
-    t.true(nextMove.call(gameObject) === 4);
 });
