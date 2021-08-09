@@ -1,5 +1,5 @@
 import { createBoard, placeOnBoard } from './board.js';
-import opts from '../vars/const.js';
+import settings from '../vars/const.js';
 import handleEvent from './events.js';
 import getEveryWinningMove from './moves.js';
 
@@ -15,7 +15,7 @@ function init(parent, size) {
     this.winningMoves = getEveryWinningMove(size);
 }
 
-export const gameObject = Object.create(opts);
+export const gameObject = Object.create(settings);
 
 export default function tictactoe(parent = document.body, size = 3) {
     init.call(gameObject, parent, size);
