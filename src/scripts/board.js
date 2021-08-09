@@ -1,11 +1,6 @@
 import { checkForWinner } from './state.js';
 import { gameObject } from './tictactoe.js';
 
-const getRowFromIndex = (index) => Math.floor(index / gameObject.boardSize);
-
-const getColFromIndex = (index) =>
-    index - gameObject.boardSize * Math.floor(index / gameObject.boardSize);
-
 export function createBoard() {
     gameObject.elem.classList.add(gameObject.REFERENCE);
     gameObject.boardStateArray.forEach(() => {
