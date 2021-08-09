@@ -13,6 +13,6 @@ export default function handleEvent(event) {
         setTimeout(() => {
             autoPlay();
             gameObject.lock = false;
-        }, 500);
+        }, gameObject.DELAY);
     }
 }

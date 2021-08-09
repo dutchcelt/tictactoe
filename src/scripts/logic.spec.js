@@ -46,7 +46,7 @@ test('Autoplay', async (t) => {
     placeOnBoard(gameObject.X, gameObject.elems[0]);
     autoPlay();
 
-    await wait(600);
+    await wait(gameObject.DELAY);
 
     // The standard counter is to take the center position
     t.true(elemHasMark(4, gameObject.O));
