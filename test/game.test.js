@@ -60,7 +60,7 @@ test('main object test', (t) => {
 });
 
 test('create board', (t) => {
-    tictactoe(document.body, 3);
+    tictactoe(document.body, 7);
     t.assert(gameObject.elem.className === gameObject.REFERENCE);
     t.assert(
         gameObject.elem.children.length === gameObject.boardStateArray.length
