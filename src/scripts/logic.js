@@ -14,7 +14,8 @@ const getWinningMoveFor = (mark) => {
     gameObject.winningMoves.some((pattern) => {
         const line = pattern.map((i) => gameObject.boardStateArray[i]);
         if (
-            line.filter((m) => m === mark).length === 2 &&
+            line.filter((m) => m === mark).length ===
+                gameObject.boardSize - 1 &&
             line.indexOf('') >= 0
         ) {
             pos = pattern[line.indexOf('')];
