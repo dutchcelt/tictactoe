@@ -13,6 +13,8 @@ browserEnv(['document']);
 
 // game states
 
+const newGame = (size) => tictactoe(document.body, size);
+
 const states = {
     // Small board, X wins
     small: ['X', '', 'O', 'X'],
@@ -50,7 +52,7 @@ const states = {
     tie: ['X', 'O', 'X', 'O', 'O', 'X', 'X', 'X', 'O'],
 };
 test('main object test', (t) => {
-    tictactoe(document.body, 3);
+    newGame(3);
     t.assert(gameObject.turn === 0);
     t.assert(gameObject.boardSize === 3);
     t.assert(gameObject.boardStateArray.length === 9); // 3 x 3
@@ -60,7 +62,7 @@ test('main object test', (t) => {
 });
 
 test('create board', (t) => {
-    tictactoe(document.body, 7);
+    newGame(7);
     t.assert(gameObject.elem.className === gameObject.REFERENCE);
     t.assert(
         gameObject.elem.children.length === gameObject.boardStateArray.length
@@ -68,7 +70,7 @@ test('create board', (t) => {
 });
 
 test('placeOnBoard', (t) => {
-    tictactoe(document.body, 3);
+    newGame(3);
     const mark = 'X';
 
     placeOnBoard(mark, gameObject.elem.children[1]);
@@ -81,19 +83,19 @@ test('placeOnBoard', (t) => {
 });
 
 test('game over', (t) => {
-    tictactoe(document.body, 2);
+    newGame(2);
 
     // small board
     gameObject.boardStateArray = states.small;
     t.true(gameOver('X'));
 
-    tictactoe(document.body, 4);
+    newGame(4);
 
     // large board - Column win
     gameObject.boardStateArray = states.large;
     t.true(gameOver('X', 4, states.large));
 
-    tictactoe(document.body, 3);
+    newGame(3);
 
     // empty
     gameObject.boardStateArray = states.empty;
@@ -119,7 +121,7 @@ test('game over', (t) => {
 });
 
 test('Check for a winner', async (t) => {
-    tictactoe(document.body, 3);
+    newGame(3);
     const thisWinner = checkForWinner.bind(gameObject);
     // empty board
     await thisWinner('X');
@@ -140,13 +142,13 @@ test('Check for a winner', async (t) => {
 });
 
 test('return the other mark', (t) => {
-    tictactoe(document.body, 3);
+    newGame(3);
     const otherPlayer = other.bind(gameObject);
     t.true(otherPlayer(gameObject.X) === gameObject.O);
     t.true(otherPlayer(gameObject.O) === gameObject.X);
 });
 
 test('Find matching marks', (t) => {
-    tictactoe(document.body, 3);
+    newGame(3);
     t.true(nextMove.call(gameObject) === 4);
 });
