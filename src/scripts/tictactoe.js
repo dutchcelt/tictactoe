@@ -1,6 +1,7 @@
 import { createBoard, placeOnBoard } from './board.js';
 import opts from '../vars/const.js';
 import handleEvent from './events.js';
+import { getEveryWinningMove } from './moves.js';
 
 function init(parent, size) {
     this.boardSize = size;
@@ -11,6 +12,7 @@ function init(parent, size) {
     this.winner = false;
     this.lock = false;
     this.handleEvent = handleEvent;
+    this.winningMoves = getEveryWinningMove(size);
 }
 
 export const gameObject = Object.create(opts);

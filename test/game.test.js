@@ -81,24 +81,41 @@ test('placeOnBoard', (t) => {
 });
 
 test('game over', (t) => {
+    tictactoe(document.body, 2);
+
     // small board
-    t.true(gameOver('X', 2, states.small));
+    gameObject.boardStateArray = states.small;
+    t.true(gameOver('X'));
+
+    tictactoe(document.body, 4);
+
     // large board - Column win
+    gameObject.boardStateArray = states.large;
     t.true(gameOver('X', 4, states.large));
+
+    tictactoe(document.body, 3);
+
     // empty
-    t.false(gameOver('X', 3, states.empty));
+    gameObject.boardStateArray = states.empty;
+    t.false(gameOver('X'));
     // row
-    t.true(gameOver('O', 3, states.row));
+    gameObject.boardStateArray = states.row;
+    t.true(gameOver('O'));
     // Column
-    t.true(gameOver('X', 3, states.column));
+    gameObject.boardStateArray = states.column;
+    t.true(gameOver('X'));
     // random
-    t.false(gameOver('O', 3, states.random));
+    gameObject.boardStateArray = states.random;
+    t.false(gameOver('O'));
     // backward diagonal
-    t.true(gameOver('X', 3, states.backwardDiagonal));
+    gameObject.boardStateArray = states.backwardDiagonal;
+    t.true(gameOver('X'));
     // forward diagonal
-    t.true(gameOver('O', 3, states.forwardDiagonal));
+    gameObject.boardStateArray = states.forwardDiagonal;
+    t.true(gameOver('O'));
     // game is a tie
-    t.true(gameOver('O', 3, states.tie));
+    gameObject.boardStateArray = states.tie;
+    t.true(gameOver('O'));
 });
 
 test('Check for a winner', async (t) => {

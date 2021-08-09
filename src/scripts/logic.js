@@ -1,18 +1,19 @@
-import { default as tictactoe } from './tictactoe.js';
+import { default as tictactoe, gameObject } from './tictactoe.js';
 import { placeOnBoard } from './board.js';
-import { getEveryWinningMove, gameOver, constructorArray } from './state.js';
+import { gameOver } from './state.js';
+import { getEveryWinningMove } from './moves.js';
 
 export function other(mark) {
-    if (mark !== this.X && mark !== this.O) {
-        throw `Invalid mark used. Should be an "${this.X}" or an "${this.O}"`;
+    if (mark !== gameObject.X && mark !== gameObject.O) {
+        throw `Invalid mark used. Should be an "${gameObject.X}" or an "${gameObject.O}"`;
     }
-    return mark === this.X ? this.O : this.X;
+    return mark === gameObject.X ? gameObject.O : gameObject.X;
 }
 
-const getWinningMove = (mark, boardSize, boardStateArray) => {
+const getWinningMoveFor = (mark) => {
     let pos;
-    getEveryWinningMove(boardSize, boardStateArray).some((pattern) => {
-        const line = pattern.map((i) => boardStateArray[i]);
+    gameObject.winningMoves.some((pattern) => {
+        const line = pattern.map((i) => gameObject.boardStateArray[i]);
         if (
             line.filter((m) => m === mark).length === 2 &&
             line.indexOf('') >= 0
@@ -25,9 +26,9 @@ const getWinningMove = (mark, boardSize, boardStateArray) => {
 };
 
 export function autoPlay() {
-    const index = nextMove.call(this);
-    if (index > -1 && !this.winner)
-        placeOnBoard.call(this, 'O', this.elems[index]);
+    const index = nextMove();
+    if (index > -1 && !gameObject.winner)
+        placeOnBoard.call(gameObject, 'O', gameObject.elems[index]);
 }
 
 export function resetGame(elem, parent) {
@@ -36,26 +37,18 @@ export function resetGame(elem, parent) {
 }
 
 export function nextMove() {
-    const boardIndex = this.boardStateArray.map((m, i) => i);
+    const boardIndex = gameObject.boardStateArray.map((m, i) => i);
     const centerPosition = Math.floor(boardIndex.length / 2);
-    const centerMark = this.boardStateArray[centerPosition];
+    const centerMark = gameObject.boardStateArray[centerPosition];
     const evenArray = boardIndex.filter(
         (i) => !!(i % 2 == 0) && i !== centerPosition
     );
     const oddArray = boardIndex.filter((i) => !(i % 2 == 0));
 
-    const thisOther = other.bind(this);
-
     let newPos = -1;
-    const mark = this.turn % 2 == 0 ? this.O : this.X;
-    const winningMove = getWinningMove(
-        thisOther(mark),
-        this.boardSize,
-        this.boardStateArray
-    );
-    const nextCoord =
-        winningMove ||
-        getWinningMove(mark, this.boardSize, this.boardStateArray); // Blocking move;
+    const mark = gameObject.turn % 2 == 0 ? gameObject.O : gameObject.X;
+    const winningMove = getWinningMoveFor(other(mark));
+    const nextCoord = winningMove || getWinningMoveFor(mark); // Blocking move;
 
     if (nextCoord !== undefined) {
         newPos = nextCoord;
@@ -63,7 +56,7 @@ export function nextMove() {
         newPos = centerPosition;
     } else {
         [...evenArray, ...oddArray].some((i) => {
-            if (!this.boardStateArray[i]) {
+            if (!gameObject.boardStateArray[i]) {
                 newPos = i;
                 return true;
             }
