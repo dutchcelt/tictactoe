@@ -4,7 +4,6 @@ import handleEvent from './events.js';
 
 function init(parent, size) {
     this.boardSize = size;
-    this.NUMBEROFSQUARES = Math.pow(size, 2);
     this.parent = parent;
     this.elem = document.createElement('main');
     this.turn = 0;

@@ -8,9 +8,9 @@ const getColFromIndex = (index) =>
 
 export function createBoard() {
     gameObject.elem.classList.add(gameObject.REFERENCE);
-    for (let i = 0; i < gameObject.NUMBEROFSQUARES; i++) {
+    gameObject.boardStateArray.forEach(() => {
         gameObject.elem.appendChild(document.createElement('span'));
-    }
+    });
     gameObject.elems = [...gameObject.elem.childNodes];
     gameObject.elem.addEventListener('click', gameObject, false);
     gameObject.parent.appendChild(gameObject.elem);

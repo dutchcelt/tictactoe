@@ -64,7 +64,7 @@ export function checkForWinner(mark) {
     return new Promise((resolve) => {
         if (gameOver(mark)) {
             gameObject.winner =
-                gameObject.turn === gameObject.NUMBEROFSQUARES
+                gameObject.turn === gameObject.boardStateArray.length
                     ? gameObject.TIE
                     : mark;
         }

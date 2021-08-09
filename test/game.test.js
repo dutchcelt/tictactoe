@@ -53,7 +53,7 @@ test('main object test', (t) => {
     tictactoe(document.body, 3);
     t.assert(gameObject.turn === 0);
     t.assert(gameObject.boardSize === 3);
-    t.assert(gameObject.NUMBEROFSQUARES === 9); // 3 x 3
+    t.assert(gameObject.boardStateArray.length === 9); // 3 x 3
     t.assert(gameObject.winner === false);
     t.assert(typeof gameObject.handleEvent === 'function');
     t.assert(gameObject.elem.tagName === 'MAIN');
@@ -62,7 +62,9 @@ test('main object test', (t) => {
 test('create board', (t) => {
     tictactoe(document.body, 3);
     t.assert(gameObject.elem.className === gameObject.REFERENCE);
-    t.assert(gameObject.elem.children.length === gameObject.NUMBEROFSQUARES);
+    t.assert(
+        gameObject.elem.children.length === gameObject.boardStateArray.length
+    );
 });
 
 test('placeOnBoard', (t) => {
@@ -115,7 +117,7 @@ test('Check for a winner', async (t) => {
     t.true(gameObject.winner === 'O');
     // game is a tie
     gameObject.boardStateArray = states.tie;
-    gameObject.turn = gameObject.NUMBEROFSQUARES;
+    gameObject.turn = gameObject.boardStateArray.length;
     await thisWinner(); // Nobody
     t.true(gameObject.winner === gameObject.TIE);
 });
