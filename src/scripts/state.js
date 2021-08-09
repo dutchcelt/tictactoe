@@ -14,6 +14,7 @@ export function gameOver(mark) {
 }
 export function checkForWinner(mark) {
     // wrapping an asynchronous (setTimeout) function with a promise
+    // This makes the gameplay feel more natural to the user
     return new Promise((resolve) => {
         if (gameOver(mark)) {
             gameObject.winner =
@@ -28,7 +29,7 @@ export function checkForWinner(mark) {
                     gameObject.winner;
                 gameObject.lock = false;
                 resolve();
-            }, 1000);
+            }, gameObject.DELAY);
         } else {
             resolve();
         }
