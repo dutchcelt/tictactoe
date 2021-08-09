@@ -1,5 +1,5 @@
 //	A function that creates an empty array so that we can create maps corresponding with the size of the board.
-export const constructorArray = (boardSize) => new Array(boardSize).fill();
+const constructorArray = (boardSize) => new Array(boardSize).fill();
 
 const getFormulas = (boardSize) => [
     //	row formula
@@ -32,8 +32,7 @@ const getPatternArray = (boardSize, formulaFunction) => {
             .flat(+Array.isArray(patternArray[0]))
     );
 };
-
-export const getEveryWinningMove = (boardSize) => {
+const getEveryWinningMove = (boardSize) => {
     const formulaArray = getFormulas(boardSize);
     const winningOptionsArray = formulaArray.map((formulaFunction) =>
         // create an array of patterns based on the formula array above
@@ -41,3 +40,5 @@ export const getEveryWinningMove = (boardSize) => {
     );
     return winningOptionsArray.flat(1);
 };
+
+export { getEveryWinningMove as default };

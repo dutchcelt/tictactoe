@@ -1,5 +1,4 @@
 import { gameObject } from './tictactoe.js';
-import { getEveryWinningMove } from './moves.js';
 
 export function gameOver(mark) {
     return gameObject.winningMoves.some(

@@ -1,7 +1,7 @@
 import { createBoard, placeOnBoard } from './board.js';
 import opts from '../vars/const.js';
 import handleEvent from './events.js';
-import { getEveryWinningMove } from './moves.js';
+import getEveryWinningMove from './moves.js';
 
 function init(parent, size) {
     this.boardSize = size;

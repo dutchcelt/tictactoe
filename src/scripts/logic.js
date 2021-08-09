@@ -1,7 +1,6 @@
 import { default as tictactoe, gameObject } from './tictactoe.js';
 import { placeOnBoard } from './board.js';
 import { gameOver } from './state.js';
-import { getEveryWinningMove } from './moves.js';
 
 export function other(mark) {
     if (mark !== gameObject.X && mark !== gameObject.O) {
