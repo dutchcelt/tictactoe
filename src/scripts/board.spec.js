@@ -1,6 +1,6 @@
 import test from 'ava';
 import browserEnv from 'browser-env';
-import { gameObject, default as tictactoe } from './tictactoe.js';
+import { gameObject, init, default as tictactoe } from './tictactoe.js';
 import { createBoard, placeOnBoard } from './board.js';
 
 browserEnv(['document']);
@@ -8,7 +8,8 @@ browserEnv(['document']);
 const newGame = (size) => tictactoe(document.body, size);
 
 test('create board', (t) => {
-    newGame(7);
+    init.call(gameObject, document.body, 7);
+    createBoard();
     t.assert(gameObject.elem.className === gameObject.REFERENCE);
     t.assert(
         gameObject.elem.children.length === gameObject.boardStateArray.length

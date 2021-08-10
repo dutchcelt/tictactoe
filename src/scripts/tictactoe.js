@@ -3,7 +3,7 @@ import settings from '../vars/const.js';
 import handleEvent from './events.js';
 import getEveryWinningMove from './moves.js';
 
-function init(parent, size) {
+export function init(parent, size) {
     this.boardSize = size;
     this.parent = parent;
     this.elem = document.createElement('main');

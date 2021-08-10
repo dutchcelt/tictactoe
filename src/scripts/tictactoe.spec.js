@@ -1,10 +1,16 @@
 import test from 'ava';
 import browserEnv from 'browser-env';
-import { gameObject, default as tictactoe } from './tictactoe.js';
+import { gameObject, init, default as tictactoe } from './tictactoe.js';
 
 browserEnv(['document']);
 
 const newGame = (size) => tictactoe(document.body, size);
+
+test('initializing the gameObject', (t) => {
+    t.assert(gameObject.boardSize === undefined);
+    init.call(gameObject, document.body, 4);
+    t.assert(gameObject.boardSize === 4);
+});
 
 test('main object test', (t) => {
     newGame(3);
