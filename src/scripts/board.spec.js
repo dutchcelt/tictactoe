@@ -8,7 +8,7 @@ browserEnv(['document']);
 const newGame = (size) => tictactoe(document.body, size);
 
 test('create board', (t) => {
-    init.call(gameObject, document.body, 7);
+    Object.assign(gameObject, init(document.body, 7));
     createBoard();
     t.assert(gameObject.elem.className === gameObject.REFERENCE);
     t.assert(

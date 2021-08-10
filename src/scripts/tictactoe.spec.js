@@ -8,7 +8,7 @@ const newGame = (size) => tictactoe(document.body, size);
 
 test('initializing the gameObject', (t) => {
     t.assert(gameObject.boardSize === undefined);
-    init.call(gameObject, document.body, 4);
+    Object.assign(gameObject, init(document.body, 4));
     t.assert(gameObject.boardSize === 4);
 });
 
