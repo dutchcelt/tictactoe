@@ -5,8 +5,8 @@
   "include": [
   "src/**/*.spec.js"
 ],
-"branches": 80,
+"branches": 100,
   "lines": 80,
   "functions": 80,
-  "statements": 80
+  "statements": 50
 }
