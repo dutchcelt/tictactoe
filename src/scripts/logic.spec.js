@@ -18,10 +18,11 @@ test('return the other mark', (t) => {
     t.true(otherPlayer(gameObject.O) === gameObject.X);
 });
 
-test('Find matching marks', (t) => {
+test('Find next move', (t) => {
     newGame(3);
+    const moved = nextMove();
     // First counter move is always the center!
-    t.true(nextMove() === 4);
+    t.true(moved === 4);
 });
 
 test('Reset game', (t) => {
