@@ -14,7 +14,8 @@
     "devDependencies": {
         "@web/dev-server": "^0.1.20",
         "ava": "^3.15.0",
-        "browser-env": "^3.3.0"
+        "browser-env": "^3.3.0",
+        "nyc": "^15.1.0"
     },
     "description": "silly game"
 }

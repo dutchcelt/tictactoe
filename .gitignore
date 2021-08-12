@@ -2,4 +2,7 @@
 node_modules
 .nova
 .idea
-.prettierrc.json
+.nyc_output
+.nycrc
+coverage
+.prettierrc
