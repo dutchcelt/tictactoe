@@ -9,7 +9,7 @@ Basic tictactoe implementation using CSS grid and Web Components.
 
 ### Install
 
-```npm i```
+```yarn install```
 
 
 ### Script Options
