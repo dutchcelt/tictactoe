@@ -1,5 +1,5 @@
 # tictactoe
-Basic tictactoe implementation using CSS grid and Web Components.
+Basic Tic-tac-toe (noughts and crosses) implementation using CSS grid and Web Components.
 
 
 ### Dependencies
