@@ -4,7 +4,7 @@
 	"main": "src/index.html",
 	"type": "module",
 	"scripts": {
-		"copy": "mkdir -p ./dist/tictactoe && cd src && cp -R . ../dist/tictactoe",
+		"copy": "mkdir -p ./dist && cd src && cp -R . ../dist",
 		"game": "wds",
 		"develop": "wds & ava --verbose --watch ",
 		"test": "c8 ava"
