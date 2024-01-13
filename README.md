@@ -2,6 +2,10 @@
 
 Basic Tic-tac-toe (noughts and crosses) implementation using CSS grid and Web Components.
 
+## Demo
+
+https://dutchcelt.github.io/tictactoe/
+
 ### Dependencies
 
 -   NPM / Node
