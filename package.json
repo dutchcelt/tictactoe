@@ -16,7 +16,6 @@
 		"@web/dev-server": "^0.4.1",
 		"ava": "^6.0.1",
 		"c8": "^9.1.0",
-		"copyfiles": "^2.4.1",
 		"jsdom": "^23.2.0"
 	},
 	"description": "silly game"

@@ -20,5 +20,5 @@ test('main object test', (t) => {
 	t.assert(gameObject.boardStateArray.length === 9); // 3 x 3
 	t.assert(gameObject.winner === false);
 	t.assert(typeof gameObject.handleEvent === 'function');
-	t.assert(gameObject.elem.tagName === 'MAIN');
+	t.assert(gameObject.elem.tagName === 'DIV');
 });

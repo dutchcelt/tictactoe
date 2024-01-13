@@ -6,19 +6,18 @@ Basic Tic-tac-toe (noughts and crosses) implementation using CSS grid and Web Co
 
 https://dutchcelt.github.io/tictactoe/
 
-### Dependencies
+## Dependencies
 
--   NPM / Node
--   Yarn
+-   NPM / Node (v20)
 
 ### Install
 
-`npm i`
+`npm ci`
 
-### Script Options
+### NPM Script Options
 
-Run the game, run tests or set development mode
+Run the game, run tests or run in development mode
 
--   npm test
--   npm run develop
--   npm run game
+-   `npm run game`
+-   `npm test`
+-   `npm run develop`
