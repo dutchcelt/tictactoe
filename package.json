@@ -1,21 +1,23 @@
 {
-    "name": "tictactoe",
-    "version": "1.0.0",
-    "main": "src/main.js",
-    "type": "module",
-    "scripts": {
-        "start": "web-dev-server",
-        "develop": "web-dev-server & ava --verbose --watch ",
-        "test": "c8 ava"
-    },
-    "repository": "git+https://github.com/dutchcelt/tictactoe.git",
-    "author": "C. Egor Kloos",
-    "license": "MIT",
-    "devDependencies": {
-        "@web/dev-server": "^0.1.20",
-        "ava": "^3.15.0",
-        "browser-env": "^3.3.0",
-        "c8": "^7.8.0"
-    },
-    "description": "silly game"
+	"name": "tictactoe",
+	"version": "1.0.1",
+	"main": "src/index.html",
+	"type": "module",
+	"scripts": {
+		"copy": "mkdir -p ./dist/tictactoe && cd src && cp -R . ../dist/tictactoe",
+		"game": "wds",
+		"develop": "wds & ava --verbose --watch ",
+		"test": "c8 ava"
+	},
+	"repository": "git+https://github.com/dutchcelt/tictactoe.git",
+	"author": "C. Egor Kloos",
+	"license": "MIT",
+	"devDependencies": {
+		"@web/dev-server": "^0.4.1",
+		"ava": "^6.0.1",
+		"c8": "^9.1.0",
+		"copyfiles": "^2.4.1",
+		"jsdom": "^23.2.0"
+	},
+	"description": "silly game"
 }
