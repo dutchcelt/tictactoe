@@ -1,14 +1,18 @@
-import tictactoe from 'ticatactoe';
+import tictactoe from './scripts/tictactoe.js';
+import { styles, global } from './styles/tictactoe.css.js';
+
+const insertStyles = (target, sheet) => {
+	target.adoptedStyleSheets.includes(sheet) || target.adoptedStyleSheets.push(sheet);
+};
+
+insertStyles(document, global);
 
 class tictactoeElement extends HTMLElement {
-    constructor() {
-        super();
-        const shadow = this.attachShadow({ mode: 'open' });
-        shadow.innerHTML = `<link rel="stylesheet" href="styles/tictactoe.css" media="screen" />`;
-    }
-
-    connectedCallback() {
-        tictactoe(this.shadowRoot);
-    }
+	constructor() {
+		super();
+		const shadow = this.attachShadow({ mode: 'open' });
+		insertStyles(shadow, styles);
+		tictactoe(shadow);
+	}
 }
-customElements.define('trvt-tictactoe', tictactoeElement);
+customElements.define('tic-tac-toe', tictactoeElement);

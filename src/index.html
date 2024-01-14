@@ -5,32 +5,18 @@
 		<title>Dutchcelt&apos;s Tictactoe</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<style>
-			:root {
-				--darkgrey: #3f3f3f;
-				--orange: goldenrod;
-				--green: olivedrab;
-				--line: 5px;
-				--weight: 12px;
-			}
 			body {
-				background: var(--darkgrey);
+				background: var(--tictactoe-darkgrey, canvas);
 				margin: unset;
 				min-height: 100dvh;
 				display: grid;
 				place-content: center;
 			}
 		</style>
-		<script type="importmap">
-			{
-				"imports": {
-					"ticatactoe": "./scripts/tictactoe.js"
-				}
-			}
-		</script>
 		<script type="module" src="./main.js"></script>
 	</head>
 
 	<body>
-		<trvt-tictactoe></trvt-tictactoe>
+		<tic-tac-toe></tic-tac-toe>
 	</body>
 </html>

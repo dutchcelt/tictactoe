@@ -1,9 +1,10 @@
 {
 	"name": "tictactoe",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"main": "src/index.html",
 	"type": "module",
 	"scripts": {
+		"build": "npx -y esbuild src/main.js --bundle --outdir=build --minify",
 		"copy": "mkdir -p ./dist && cd src && cp -R . ../dist",
 		"game": "wds",
 		"develop": "wds & ava --verbose --watch ",
