@@ -4,7 +4,7 @@
 	"main": "src/index.html",
 	"type": "module",
 	"scripts": {
-		"build": "npx -y esbuild src/main.js --bundle --outdir=build --minify",
+		"build": "npx -y esbuild src/main.js --bundle --outdir=dist/build --minify",
 		"copy": "mkdir -p ./dist && cd src && cp -R . ../dist",
 		"game": "wds",
 		"develop": "wds & ava --verbose --watch ",
