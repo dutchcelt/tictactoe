@@ -4,6 +4,10 @@ services:
             - sleep
             - infinity
         image: tictactoe
+        environment:
+            PORT: 9009
+        ports:
+            - 9009:9009
         init: true
         volumes:
             - type: bind

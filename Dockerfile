@@ -1,17 +1,28 @@
 # Select the image to use
-FROM --platform=linux/amd64 node:20
+FROM --platform=linux/amd64 node:lts
 
-## Install dependencies in the root of the Container
+# Create an application directory
+RUN mkdir -p /app
+
+# The /app directory should act as the main application directory
+WORKDIR /app
+
+# Copy the app package and package-lock.json file
 COPY package*.json ./
-ENV NODE_PATH=/node_modules
-ENV PATH=$PATH:/node_modules/.bin
-RUN npm i
 
-# Add project files to /app route in Container
-ADD . ./src
+# Install node packages
+RUN npm install
 
-# Set working dir to /src
-WORKDIR /src
+# Copy or project directory (locally) in the current directory of our docker image (/app)
+COPY . .
 
-# expose port 9009
+# Build the app
+RUN npm run build
+
+# Expose $PORT on container.
+# We use a varibale here as the port is something that can differ on the environment.
 EXPOSE 9009
+
+
+# Start the app
+# CMD [ "npm", "run","develop" ]
